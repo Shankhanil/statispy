@@ -18,7 +18,7 @@ class Test_stats:
             3: 3
         }
         mean = s.mean(sample)
-        assert mean == pytest.approx(2.33), 'approximate weighted mean is 2.333'
+        assert mean == pytest.approx(2.333, abs=1e-3), 'approximate weighted mean is 2.333'
         
         # raise an error if datatype isn't List or dict
         sample = '123'
@@ -31,19 +31,8 @@ class Test_stats:
         sample = list(range(1,6))
         rms = s.RMS(sample)
         
-        assert rms == pytest.approx(3.3166)
-        
-        # weighted RMS on a dict
-        '''
-        sample = {
-            1: 1,
-            2: 2,
-            3: 3
-        }
-        rms = s.RMS(sample)
-        assert rms == pytest.approx(2.33), 'approximate weighted RMS is '
-        '''
-        
+        assert rms == pytest.approx(3.3166, abs=1e-3)
+
         # raises error on unsupported format
         sample = '123'
         with pytest.raises(sE.UnsupportedDataFormatError):
@@ -55,7 +44,7 @@ class Test_stats:
         sample = list(range(1,6))
         sdDev = s.SD(sample)
         
-        assert sdDev == pytest.approx(1.4142)
+        assert sdDev == pytest.approx(1.4142, abs=1e-3)
         
         # error for unweighted format
         sample = '123'
