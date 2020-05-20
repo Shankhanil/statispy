@@ -1,12 +1,18 @@
+from statispy import statispyError as sE
 def __init__():
     pass
     
-def sample_mean(X):
+def mean(X, sample_sample_type = 'pop'):
+    if not isinstance(X, (list, dict)):
+        raise sE.UnsupportedDataFormatError(type(X))
     pass
     
-def sample_StdDeviation(X):
+def RMS(X, sample_type = 'pop'):
+    pass
+    
+def SD(X, sample_type = 'pop'):
     pass
 
-def sample_variance(X):
+def variance(X, sample_type = 'pop'):
     pass
    
