@@ -1,11 +1,13 @@
 from statispy import statispyError as sE
 import math
+import random
 
 def __init__():
     pass
 
-def create_sample(X):
-    pass
+def create_sample(X, size, method = 'random'):
+    if method == 'random':
+        return random.sample(X, size)
     
 def mean(X):
     if isinstance(X, list):
