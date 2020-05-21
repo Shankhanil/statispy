@@ -4,19 +4,6 @@ import random
 import pandas as pd
 def __init__():
     pass
-
-def create_sample(data, size, method = 'random'):
-    validate(data)
-    sample = pd.DataFrame(columns = data.columns)
-    if method == 'random':
-        sample_index = random.sample(list(data.index), size)
-        for i in sample_index:
-            sample = sample.append( data.iloc[i])
-    if method == 'systematic':
-        set_size = int(math.ceil(len(data)/size))
-        for i in range(0,size):
-            sample = sample.append( data.iloc[i*set_size])
-    return sample
     
 def validate(data, col = None, weight = None):
     if not isinstance(data, pd.DataFrame):
@@ -26,13 +13,33 @@ def validate(data, col = None, weight = None):
     if col != None:
         if col not in colList:
             raise sE.MissingColumnError(col, colList)
+        
+#        print(data[col].isnull().any())
+        
+        if data[col].isnull().any():
+            raise sE.ContainsNaNValueError(col)
+        
+        if data[col].dtypes == 'object':
+            raise sE.InconsistentDataTypeError(col)
+
         if not data[col].dtypes == 'int64' and not data[col].dtypes == 'float64':
             raise sE.UnsupportedDataFormatError(data[col].dtypes)
     if weight != None:
         if weight not in colList:
             raise sE.MissingColumnError(col, colList)
+        
+#        print(data[weight].isnull().any())
+        
+        if data[weight].isnull().any():
+            raise sE.ContainsNaNValueError(weight)
+        
+        if data[weight].dtypes == 'object':
+            raise sE.InconsistentDataTypeError(weight)
+
         if not data[weight].dtypes == 'int64' and not data[weight].dtypes == 'float64':
-            raise sE.UnsupportedDataFormatError(data[col].dtypes)
+            raise sE.UnsupportedDataFormatError(data[weight].dtypes)
+        if not data[weight].dtypes == 'int64' and not data[weight].dtypes == 'float64':
+            raise sE.UnsupportedDataFormatError(data[weight].dtypes)
 
 def mean(data, col, weight = None):
     
@@ -68,4 +75,5 @@ def variance(data, col):
 
 def SD(data, col):
     # if isinstance(X, list):
+    validate(data, col)
     return math.sqrt(variance(data, col))
