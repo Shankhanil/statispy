@@ -43,7 +43,7 @@ from statispy import sample
 
 ### Basic sampling
 ```python
-sample.basic_sampling(data, size, method = 'random')
+sample.basic_sample(data, size, method = 'random')
 ```
 1. data: pandas DataFrame object, containing the statistical dataset (population)
 2. size: Sample size
@@ -60,11 +60,12 @@ from statispy import stats
 
 ### Mean
 ```python
-stats.meanmean(data, col, weight = None)
+stats.mean(data, col, weight = None)
 ```
 1. data: pandas DataFrame object, containing the statistical dataset (population)
 2. col: column whose mean is to be calculated
-3. Weight: Default value is ```None```. To calculate weighted mean, set ```weight``` as the column name which contains the weight
+3. weight: Default value is ```None```. To calculate weighted mean, set ```weight``` as the column name which contains the weight
+
 Returns : Float/integer
 
 ### Root mean square
@@ -73,6 +74,7 @@ stats.RMS(data, col)
 ```
 1. data: pandas DataFrame object, containing the statistical dataset (population)
 2. col: column whose mean is to be calculated
+
 Returns : Float/integer
 
 
@@ -82,6 +84,7 @@ stats.variance(data, col)
 ```
 1. data: pandas DataFrame object, containing the statistical dataset (population)
 2. col: column whose mean is to be calculated
+
 Returns : Float/integer
 
 ### Standard Deviation
@@ -90,6 +93,7 @@ stats.SD(data, col)
 ```
 1. data: pandas DataFrame object, containing the statistical dataset (population)
 2. col: column whose mean is to be calculated
+
 Returns : Float/integer
 
 ## Versioning
@@ -100,7 +104,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Shankhanil Ghosh** - *Initial work*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Shankhanil/statispy/contributors) who participated in this project.
 
 ## License
 
