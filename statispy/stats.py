@@ -5,19 +5,26 @@ import pandas as pd
 def __init__():
     pass
 
-def create_sample(X, size, method = 'random'):
+def create_sample(data, size, method = 'random'):
+    validate(data)
+    sample = pd.DataFrame(columns = data.columns)
     if method == 'random':
-        return random.sample(X, size)
+        sample_index = random.sample(list(data.index), size)
+        for i in sample_index:
+            sample = sample.append( data.iloc[i])
+    # print(sample.loc[sample_index[0]])
+    return sample
     
-def validate(data, col, weight = None):
+def validate(data, col = None, weight = None):
     if not isinstance(data, pd.DataFrame):
         raise sE.UnsupportedDataFormatError(type(data))
     
     colList = data.columns
-    if col not in colList:
-        raise sE.MissingColumnError(col, colList)
-    if not data[col].dtypes == 'int64' and not data[col].dtypes == 'float64':
-        raise sE.UnsupportedDataFormatError(data[col].dtypes)
+    if col != None:
+        if col not in colList:
+            raise sE.MissingColumnError(col, colList)
+        if not data[col].dtypes == 'int64' and not data[col].dtypes == 'float64':
+            raise sE.UnsupportedDataFormatError(data[col].dtypes)
     if weight != None:
         if weight not in colList:
             raise sE.MissingColumnError(col, colList)

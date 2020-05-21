@@ -16,6 +16,14 @@ invalid_data = pd.DataFrame({
 invalid_data_2 = [1,2,3,4]
 
 class Test_stats:
+    def test_sample(self):
+        sample = s.create_sample(valid_data, size = 2)
+        assert len(sample) == 2
+        
+        for i in list(sample.index):
+            if (valid_data.loc[i] != sample.loc[i]).all():
+                assert False
+        assert True
 
     def test_validate(self):
         # invalid data - 1
