@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name="statispy",
-    version="0.1.0",
+    version="0.2.0",
     author="Shankhanil Ghosh",
     author_email="shankha.rik@gmail.com",
     packages=find_packages(),
