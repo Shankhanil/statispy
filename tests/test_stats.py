@@ -20,37 +20,25 @@ invalid_data = pd.DataFrame({
 invalid_data_2 = [1,2,3,4]
 
 class Test_stats:
-    def test_sample(self):
-        sample = s.create_sample(big_data, size = 4)
-        assert len(sample) == 4
-        
-        for i in list(sample.index):
-            if (big_data.loc[i] != sample.loc[i]).all():
-                assert False
-        assert True
-        
-        sample = s.create_sample(big_data, method = 'systematic' , size = 4)
-        assert len(sample) == 4
-        
-        sample_index = list(sample.index)
-        assert sample_index == [0,3,6,9]
-        
-        
-
     def test_validate(self):
-        # invalid data - 1
+        # invalid data-type
         with pytest.raises(sE.UnsupportedDataFormatError):
-            s.mean(invalid_data, col = 'c1')
-        with pytest.raises(sE.UnsupportedDataFormatError):
-            s.mean(invalid_data, col = 'c1', weight = 'c2')
-        with pytest.raises(sE.UnsupportedDataFormatError):
-            s.mean(invalid_data_2, col = 'c1')
+            s.validate(invalid_data_2, col = 'c1')
+        
+        # incosistent data type
+        with pytest.raises(sE.InconsistentDataTypeError):
+            s.validate(invalid_data, col = 'c1')
+        
+        # NaN error
+        with pytest.raises(sE.ContainsNaNValueError):
+            s.validate(invalid_data, weight = 'c2')
         
         # invalid column
         with pytest.raises(sE.MissingColumnError):
-            s.mean(valid_data, col = 'c4')
+            s.validate(valid_data, col = 'c4')
+        
         with pytest.raises(sE.MissingColumnError):
-            s.mean(valid_data, col = 'c1', weight = 'c8')
+            s.validate(valid_data, col = 'c1', weight = 'c8')
     
     def test_mean(self):
         
