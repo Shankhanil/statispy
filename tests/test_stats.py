@@ -1,6 +1,8 @@
 from statispy import stats as s
 from statispy import statispyError as sE
-import pytest,math, pandas as pd
+import pytest
+import math
+import pandas as pd
 
 valid_data = pd.DataFrame({
     'c1': [0,1,2,3],
