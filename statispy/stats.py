@@ -12,7 +12,10 @@ def create_sample(data, size, method = 'random'):
         sample_index = random.sample(list(data.index), size)
         for i in sample_index:
             sample = sample.append( data.iloc[i])
-    # print(sample.loc[sample_index[0]])
+    if method == 'systematic':
+        set_size = int(math.ceil(len(data)/size))
+        for i in range(0,size):
+            sample = sample.append( data.iloc[i*set_size])
     return sample
     
 def validate(data, col = None, weight = None):
